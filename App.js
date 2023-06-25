@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Card from "./components/Card";
 import foodData from "./food.json";
 
@@ -10,16 +10,17 @@ export default function App() {
       <View style={styles.header}>
         <Text style={styles.headerText}>MA Food Wala</Text>
       </View>
-      {foodData.map((item, index) => (
-        <Card
-        key={index}
-        food={item.food.toUpperCase()}
-        rate={item.rate}
-        image={item.image}
-        description={item.description}
-      />
-      
-      ))}
+      <ScrollView style={styles.cardContainer}>
+        {foodData.map((item, index) => (
+          <Card
+            key={index}
+            food={item.food.toUpperCase()}
+            rate={item.rate}
+            image={item.image}
+            description={item.description}
+          />
+        ))}
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
@@ -46,5 +47,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#fff",
+  },
+  cardContainer: {
+    flex: 1,
+    width: "100%",
+    paddingHorizontal: 20,
   },
 });
